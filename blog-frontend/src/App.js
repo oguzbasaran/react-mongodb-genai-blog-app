@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PostList from './components/PostList';
 import CreatePost from './components/CreatePost';
 import { getPosts } from './api';
+import './App.css'; // CSS dosyanızı içe aktarın (Opsiyonel)
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -25,7 +26,7 @@ const App = () => {
     };
 
     return (
-        <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px' }}>
+        <div className="container">
             <h1>Blog Yazma Sitesi</h1>
             <CreatePost onPostCreated={addPost} />
             <hr />
