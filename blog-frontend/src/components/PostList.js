@@ -14,7 +14,6 @@ const PostList = ({ posts, onPostDeleted }) => {
                 const response = await deletePost(id);
                 console.log(`Deletion successful. Response:`, response);
                 onPostDeleted(id);
-                toast.success('Post successfully deleted.');
             } catch (error) {
                 console.error('Error deleting post:', error);
                 if (error.response) {

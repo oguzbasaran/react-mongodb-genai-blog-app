@@ -58,7 +58,7 @@ const CreatePost = ({ onPostCreated }) => {
                 className="neumorphic-button"
                 style={{ width: '100%', marginBottom: '20px' }}
             >
-                {loading ? 'Creating...' : 'Generate Content with AI'}
+                {loading ? 'Generating... Please wait, estimated wait time: 10 seconds' : 'Generate Content with AI'}
             </button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
