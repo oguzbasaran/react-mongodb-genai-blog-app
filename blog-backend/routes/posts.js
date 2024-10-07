@@ -4,19 +4,18 @@ import Post from '../models/Post.js';
 
 const router = express.Router();
 
-// GET tüm yazıları al
+// GET all posts
 router.get('/', async (req, res) => {
     try {
-        // Hem createdAt hem de _id alanına göre sıralama
-        const posts = await Post.find().sort({ createdAt: -1, _id: -1 }); // Yeni yazılar önce gelsin
+        const posts = await Post.find().sort({ createdAt: -1 }); // New posts first
         res.json(posts);
     } catch (err) {
-        console.error('GET /api/posts Hatası:', err);
+        console.error('GET /api/posts Error:', err);
         res.status(500).json({ message: err.message });
     }
 });
 
-// POST yeni bir yazı oluştur
+// POST create a new post
 router.post('/', async (req, res) => {
     const post = new Post({
         title: req.body.title,
@@ -27,34 +26,34 @@ router.post('/', async (req, res) => {
         const newPost = await post.save();
         res.status(201).json(newPost);
     } catch (err) {
-        console.error('POST /api/posts Hatası:', err);
+        console.error('POST /api/posts Error:', err);
         res.status(400).json({ message: err.message });
     }
 });
 
-// DELETE bir yazıyı sil
+// DELETE a post
 router.delete('/:id', async (req, res) => {
     const postId = req.params.id;
-    console.log(`Silme isteği alındı. Yazı ID: ${postId}`);
+    console.log(`Delete request received. Post ID: ${postId}`);
 
     try {
-        // ID'nin geçerli bir MongoDB ObjectId olup olmadığını kontrol et
+        // Check if the ID is a valid MongoDB ObjectId
         if (!postId.match(/^[0-9a-fA-F]{24}$/)) {
-            console.error(`Geçersiz yazı ID'si: ${postId}`);
-            return res.status(400).json({ message: 'Geçersiz yazı ID\'si.' });
+            console.error(`Invalid Post ID: ${postId}`);
+            return res.status(400).json({ message: 'Invalid Post ID.' });
         }
 
         const deletedPost = await Post.findByIdAndDelete(postId);
         if (!deletedPost) {
-            console.error(`Yazı bulunamadı. ID: ${postId}`);
-            return res.status(404).json({ message: 'Yazı bulunamadı.' });
+            console.error(`Post not found. ID: ${postId}`);
+            return res.status(404).json({ message: 'Post not found.' });
         }
 
-        console.log(`Yazı başarıyla silindi. ID: ${postId}`);
-        res.json({ message: 'Yazı başarıyla silindi.' });
+        console.log(`Post successfully deleted. ID: ${postId}`);
+        res.json({ message: 'Post successfully deleted.' });
     } catch (err) {
-        console.error(`Yazı silinirken hata oluştu. ID: ${postId}`, err);
-        res.status(500).json({ message: 'Yazı silinirken bir hata oluştu.' });
+        console.error(`Error deleting post. ID: ${postId}`, err);
+        res.status(500).json({ message: 'An error occurred while deleting the post.' });
     }
 });
 

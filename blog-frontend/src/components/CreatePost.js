@@ -19,11 +19,11 @@ const CreatePost = ({ onPostCreated }) => {
             console.log('AI tarafından oluşturulan veri:', aiData);
             setTitle(aiData.title);
             setContent(aiData.content);
-            toast.success('AI ile içerik başarıyla oluşturuldu.');
+            toast.success('Content has been successfully created with AI.');
         } catch (err) {
             console.error('AI İçeriği Oluşturma Hatası:', err);
             setError('AI ile içerik oluşturulurken bir hata oluştu.');
-            toast.error('AI ile içerik oluşturulurken bir hata oluştu.');
+            toast.error('An error occurred while generating content with AI.');
         }
         setLoading(false);
     };
@@ -42,7 +42,6 @@ const CreatePost = ({ onPostCreated }) => {
             onPostCreated(newPost);
             setTitle('');
             setContent('');
-            toast.success('Yazı başarıyla oluşturuldu.');
         } catch (error) {
             console.error('Yazı oluşturulurken hata oluştu:', error);
             alert('Yazı oluşturulurken bir hata oluştu.');
@@ -52,39 +51,39 @@ const CreatePost = ({ onPostCreated }) => {
 
     return (
         <div className="neumorphic-card">
-            <h2>Yeni Yazı Oluştur</h2>
+            <h2>Create New Post</h2>
             <button
                 onClick={handleGenerateAIContent}
                 disabled={loading}
                 className="neumorphic-button"
                 style={{ width: '100%', marginBottom: '20px' }}
             >
-                {loading ? 'Yükleniyor...' : 'AI ile İçeriği Oluştur'}
+                {loading ? 'Creating...' : 'Generate Content with AI'}
             </button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Başlık:</label><br />
+                    <label>Title:</label><br />
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         className="neumorphic-input"
-                        placeholder="Başlık girin"
+                        placeholder="Enter title"
                     />
                 </div>
                 <div>
-                    <label>İçerik:</label><br />
+                    <label>Content:</label><br />
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         rows="10"
                         className="neumorphic-textarea"
-                        placeholder="İçerik girin"
+                        placeholder="Enter content"
                     ></textarea>
                 </div>
                 <button type="submit" className="neumorphic-button" style={{ width: '100%' }}>
-                    Yazıyı Kaydet
+                    Save Post
                 </button>
             </form>
         </div>

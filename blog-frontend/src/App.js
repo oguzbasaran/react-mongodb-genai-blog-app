@@ -21,24 +21,24 @@ const App = () => {
             const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setPosts(sortedData);
         } catch (error) {
-            console.error('Yazılar alınırken hata oluştu:', error);
-            toast.error('Yazılar alınırken bir hata oluştu.');
+            console.error('Error fetching posts:', error);
+            toast.error('Error fetching posts.');
         }
     };
 
     const addPost = (newPost) => {
         setPosts([newPost, ...posts]); // Yeni yazıyı listenin başına ekleyin
-        toast.success('Yeni yazı başarıyla eklendi.');
+        toast.success('New post added successfully.');
     };
 
     const removePost = (id) => {
         setPosts(posts.filter(post => post._id !== id));
-        toast.success('Yazı başarıyla silindi.');
+        toast.success('Post deleted successfully.');
     };
 
     return (
         <div className="container">
-            <h1>Blog Yazma Sitesi</h1>
+            <h1>Blog Writing Site</h1>
             <CreatePost onPostCreated={addPost} />
             <hr />
             <PostList posts={posts} onPostDeleted={removePost} />

@@ -1,34 +1,34 @@
 // src/components/PostList.js
 import React, { useState } from 'react';
 import { deletePost } from '../api';
-import { toast } from 'react-toastify'; // react-toastify'i içe aktarın
+import { toast } from 'react-toastify'; // Import react-toastify
 
 const PostList = ({ posts, onPostDeleted }) => {
-    const [deletingId, setDeletingId] = useState(null); // Silme işlemi sırasında hangi yazının silindiğini takip etmek için
+    const [deletingId, setDeletingId] = useState(null); // Track which post is being deleted
 
     const handleDelete = async (id) => {
-        if (window.confirm('Bu yazıyı silmek istediğinizden emin misiniz?')) {
-            console.log(`Silme işlemi başlatılıyor. Yazı ID: ${id}`);
+        if (window.confirm('Are you sure you want to delete this post?')) {
+            console.log(`Starting deletion. Post ID: ${id}`);
             setDeletingId(id);
             try {
                 const response = await deletePost(id);
-                console.log(`Silme işlemi başarılı. Yanıt:`, response);
+                console.log(`Deletion successful. Response:`, response);
                 onPostDeleted(id);
-                toast.success('Yazı başarıyla silindi.');
+                toast.success('Post successfully deleted.');
             } catch (error) {
-                console.error('Yazı silinirken hata oluştu:', error);
+                console.error('Error deleting post:', error);
                 if (error.response) {
-                    // Backend'den gelen hata
-                    console.error('Backend hatası:', error.response.data);
-                    toast.error(`Silme hatası: ${error.response.data.message}`);
+                    // Error from backend
+                    console.error('Backend error:', error.response.data);
+                    toast.error(`Deletion error: ${error.response.data.message}`);
                 } else if (error.request) {
-                    // İstek yapıldı ama yanıt alınamadı
-                    console.error('İstek yapıldı ama yanıt alınamadı:', error.request);
-                    toast.error('Silme işlemi sırasında sunucudan yanıt alınamadı.');
+                    // Request was made but no response
+                    console.error('No response received:', error.request);
+                    toast.error('No response from server during deletion.');
                 } else {
-                    // Diğer hatalar
-                    console.error('Diğer hata:', error.message);
-                    toast.error('Silme işlemi sırasında bir hata oluştu.');
+                    // Other errors
+                    console.error('Other error:', error.message);
+                    toast.error('An error occurred during deletion.');
                 }
             }
             setDeletingId(null);
@@ -37,15 +37,15 @@ const PostList = ({ posts, onPostDeleted }) => {
 
     return (
         <div>
-            <h2>Blog Yazıları</h2>
+            <h2>Blog Posts</h2>
             {posts.length === 0 ? (
-                <p>Henüz hiç yazı yok.</p>
+                <p>No posts yet.</p>
             ) : (
                 posts.map(post => (
                     <div key={post._id} className="neumorphic-card">
                         <h3>{post.title}</h3>
                         <p>{post.content}</p>
-                        <small>Oluşturulma Tarihi: {new Date(post.createdAt).toLocaleString()}</small>
+                        <small>Creation Date: {new Date(post.createdAt).toLocaleString()}</small>
                         <br />
                         <button
                             onClick={() => handleDelete(post._id)}
@@ -53,7 +53,7 @@ const PostList = ({ posts, onPostDeleted }) => {
                             className="neumorphic-button"
                             style={{ marginTop: '20px' }}
                         >
-                            {deletingId === post._id ? 'Siliniyor...' : 'Sil'}
+                            {deletingId === post._id ? 'Deleting...' : 'Delete'}
                         </button>
                     </div>
                 ))

@@ -1,14 +1,21 @@
 /* src/App.css */
 
 /* Genel Stil Ayarları */
+* {
+  box-sizing: border-box; /* Tüm öğelere border-box modeli uygula */
+}
+
 body {
   background: #e0e0e0; /* Neumorphism için açık gri arka plan */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
+  align-items: flex-start; /* Align to top */
+  overflow-x: hidden; /* Yatay taşmaları önle */
 }
 
 .container {
@@ -17,9 +24,11 @@ body {
   box-shadow: 
       8px 8px 16px #bebebe, 
       -8px -8px 16px #ffffff;
-  padding: 40px;
-  width: 90%;
-  max-width: 800px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1400px; /* Genişlik artırıldı */
+  margin: 0 auto; /* Ortala */
+  overflow: hidden; /* Taşmaları önlemek için */
 }
 
 h1, h2, h3 {
@@ -46,6 +55,7 @@ button:focus {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
+  width: 100%; /* Genişliği %100 yaptık */
 }
 
 .neumorphic-button:active {
@@ -53,7 +63,7 @@ button:focus {
               inset -5px -5px 10px #ffffff;
 }
 
-/* Neumorphic Input ve Textarea Stili */
+/* Neumorphic Input ve Textarea Style */
 .neumorphic-input, .neumorphic-textarea {
   background: #e0e0e0;
   border-radius: 10px;
@@ -63,9 +73,11 @@ button:focus {
   border: none;
   padding: 10px;
   width: 100%;
+  max-width: 100%; /* Taşmayı önlemek için */
   margin-bottom: 20px;
   font-size: 16px;
   color: #333;
+  resize: vertical;
 }
 
 .neumorphic-input:focus, .neumorphic-textarea:focus {
@@ -74,7 +86,7 @@ button:focus {
       inset -3px -3px 6px #ffffff;
 }
 
-/* Neumorphic Card Stili */
+/* Neumorphic Card Style */
 .neumorphic-card {
   background: #e0e0e0;
   border-radius: 20px;
@@ -83,6 +95,7 @@ button:focus {
       -8px -8px 16px #ffffff;
   padding: 20px;
   margin-bottom: 20px;
+  width: 100%; /* Kartın genişliğini konteynerle uyumlu hale getirin */
 }
 
 /* Neumorphic Toggle Switch */
@@ -134,4 +147,69 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(30px);
+}
+
+/* Responsive Tasarım */
+@media (max-width: 1400px) {
+  .container {
+      max-width: 1200px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .container {
+      max-width: 100%;
+      padding: 35px;
+      margin: 0 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .container {
+      padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+      padding: 20px;
+      max-width: 100%;
+      margin: 0 5px;
+  }
+
+  .neumorphic-button {
+      padding: 8px 16px;
+      font-size: 14px;
+  }
+
+  .neumorphic-input, .neumorphic-textarea {
+      padding: 8px;
+      font-size: 14px;
+  }
+
+  .neumorphic-card {
+      padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+      padding: 15px;
+      max-width: 100%;
+      margin: 0 5px;
+  }
+
+  .neumorphic-button {
+      padding: 6px 12px;
+      font-size: 12px;
+  }
+
+  .neumorphic-input, .neumorphic-textarea {
+      padding: 6px;
+      font-size: 12px;
+  }
+
+  .neumorphic-card {
+      padding: 10px;
+  }
 }
