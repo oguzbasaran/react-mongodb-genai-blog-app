@@ -42,6 +42,7 @@ const CreatePost = ({ onPostCreated }) => {
             onPostCreated(newPost);
             setTitle('');
             setContent('');
+            toast.success('Yazı başarıyla oluşturuldu.');
         } catch (error) {
             console.error('Yazı oluşturulurken hata oluştu:', error);
             alert('Yazı oluşturulurken bir hata oluştu.');
@@ -50,12 +51,13 @@ const CreatePost = ({ onPostCreated }) => {
     };
 
     return (
-        <div>
+        <div className="neumorphic-card">
             <h2>Yeni Yazı Oluştur</h2>
             <button
                 onClick={handleGenerateAIContent}
                 disabled={loading}
-                style={{ padding: '10px 20px', marginBottom: '10px' }}
+                className="neumorphic-button"
+                style={{ width: '100%', marginBottom: '20px' }}
             >
                 {loading ? 'Yükleniyor...' : 'AI ile İçeriği Oluştur'}
             </button>
@@ -67,7 +69,8 @@ const CreatePost = ({ onPostCreated }) => {
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                        className="neumorphic-input"
+                        placeholder="Başlık girin"
                     />
                 </div>
                 <div>
@@ -76,10 +79,13 @@ const CreatePost = ({ onPostCreated }) => {
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
                         rows="10"
-                        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+                        className="neumorphic-textarea"
+                        placeholder="İçerik girin"
                     ></textarea>
                 </div>
-                <button type="submit" style={{ padding: '10px 20px' }}>Yazıyı Kaydet</button>
+                <button type="submit" className="neumorphic-button" style={{ width: '100%' }}>
+                    Yazıyı Kaydet
+                </button>
             </form>
         </div>
     );

@@ -1,48 +1,137 @@
 /* src/App.css */
 
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+/* Genel Stil Ayarları */
+body {
+  background: #e0e0e0; /* Neumorphism için açık gri arka plan */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
 
-h1, h2 {
+.container {
+  background: #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 
+      8px 8px 16px #bebebe, 
+      -8px -8px 16px #ffffff;
+  padding: 40px;
+  width: 90%;
+  max-width: 800px;
+}
+
+h1, h2, h3 {
+  color: #333;
   text-align: center;
 }
 
 button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
+button:focus {
+  outline: none;
 }
 
-form div {
-  margin-bottom: 15px;
+/* Neumorphic Buton Stili */
+.neumorphic-button {
+  background: #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 
+      5px 5px 10px #bebebe, 
+      -5px -5px 10px #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
 }
 
-label {
-  display: block;
-  margin-bottom: 5px;
+.neumorphic-button:active {
+  box-shadow: inset 5px 5px 10px #bebebe, 
+              inset -5px -5px 10px #ffffff;
 }
 
-input[type="text"],
-textarea {
+/* Neumorphic Input ve Textarea Stili */
+.neumorphic-input, .neumorphic-textarea {
+  background: #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 
+      inset 5px 5px 10px #bebebe, 
+      inset -5px -5px 10px #ffffff;
+  border: none;
+  padding: 10px;
   width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
 }
 
-.error {
-  color: red;
+.neumorphic-input:focus, .neumorphic-textarea:focus {
+  box-shadow: 
+      inset 3px 3px 6px #bebebe, 
+      inset -3px -3px 6px #ffffff;
+}
+
+/* Neumorphic Card Stili */
+.neumorphic-card {
+  background: #e0e0e0;
+  border-radius: 20px;
+  box-shadow: 
+      8px 8px 16px #bebebe, 
+      -8px -8px 16px #ffffff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Neumorphic Toggle Switch */
+.neumorphic-toggle {
+  position: relative;
+  width: 60px;
+  height: 30px;
+}
+
+.neumorphic-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #e0e0e0;
+  transition: .4s;
+  border-radius: 30px;
+  box-shadow: 
+      inset 5px 5px 10px #bebebe, 
+      inset -5px -5px 10px #ffffff;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+  box-shadow: 
+      2px 2px 5px #bebebe, 
+      -2px -2px 5px #ffffff;
+}
+
+input:checked + .slider {
+  background: #e0e0e0;
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
 }

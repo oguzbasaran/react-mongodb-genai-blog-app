@@ -14,7 +14,7 @@ const PostList = ({ posts, onPostDeleted }) => {
                 const response = await deletePost(id);
                 console.log(`Silme işlemi başarılı. Yanıt:`, response);
                 onPostDeleted(id);
-                //toast.success('Yazı başarıyla silindi.');
+                toast.success('Yazı başarıyla silindi.');
             } catch (error) {
                 console.error('Yazı silinirken hata oluştu:', error);
                 if (error.response) {
@@ -42,7 +42,7 @@ const PostList = ({ posts, onPostDeleted }) => {
                 <p>Henüz hiç yazı yok.</p>
             ) : (
                 posts.map(post => (
-                    <div key={post._id} style={{ border: '1px solid #ccc', padding: '10px', marginBottom: '10px' }}>
+                    <div key={post._id} className="neumorphic-card">
                         <h3>{post.title}</h3>
                         <p>{post.content}</p>
                         <small>Oluşturulma Tarihi: {new Date(post.createdAt).toLocaleString()}</small>
@@ -50,15 +50,8 @@ const PostList = ({ posts, onPostDeleted }) => {
                         <button
                             onClick={() => handleDelete(post._id)}
                             disabled={deletingId === post._id}
-                            style={{
-                                marginTop: '10px',
-                                padding: '5px 10px',
-                                backgroundColor: '#dc3545',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '4px',
-                                cursor: 'pointer'
-                            }}
+                            className="neumorphic-button"
+                            style={{ marginTop: '20px' }}
                         >
                             {deletingId === post._id ? 'Siliniyor...' : 'Sil'}
                         </button>

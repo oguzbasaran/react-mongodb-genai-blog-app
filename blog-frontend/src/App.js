@@ -17,7 +17,9 @@ const App = () => {
     const fetchPosts = async () => {
         try {
             const data = await getPosts();
-            setPosts(data);
+            // Verileri createdAt alanına göre azalan sırada sıralayın
+            const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            setPosts(sortedData);
         } catch (error) {
             console.error('Yazılar alınırken hata oluştu:', error);
             toast.error('Yazılar alınırken bir hata oluştu.');
@@ -25,7 +27,7 @@ const App = () => {
     };
 
     const addPost = (newPost) => {
-        setPosts([newPost, ...posts]);
+        setPosts([newPost, ...posts]); // Yeni yazıyı listenin başına ekleyin
         toast.success('Yeni yazı başarıyla eklendi.');
     };
 
@@ -40,7 +42,7 @@ const App = () => {
             <CreatePost onPostCreated={addPost} />
             <hr />
             <PostList posts={posts} onPostDeleted={removePost} />
-            <ToastContainer /> {/* Toast bildirimlerini buraya ekleyin */}
+            <ToastContainer /> {/* Sadece burada bir kez ekleyin */}
         </div>
     );
 };
