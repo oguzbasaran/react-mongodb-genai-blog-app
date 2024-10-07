@@ -7,7 +7,8 @@ const router = express.Router();
 // GET tüm yazıları al
 router.get('/', async (req, res) => {
     try {
-        const posts = await Post.find().sort({ createdAt: -1 }); // Yeni yazılar önce gelsin
+        // Hem createdAt hem de _id alanına göre sıralama
+        const posts = await Post.find().sort({ createdAt: -1, _id: -1 }); // Yeni yazılar önce gelsin
         res.json(posts);
     } catch (err) {
         console.error('GET /api/posts Hatası:', err);
