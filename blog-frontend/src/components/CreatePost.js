@@ -1,6 +1,7 @@
 // src/components/CreatePost.js
 import React, { useState } from 'react';
 import { createPost, generateAIContent } from '../api';
+import { toast } from 'react-toastify'; // react-toastify'i içe aktarın
 
 const CreatePost = ({ onPostCreated }) => {
     const [title, setTitle] = useState('');
@@ -18,9 +19,11 @@ const CreatePost = ({ onPostCreated }) => {
             console.log('AI tarafından oluşturulan veri:', aiData);
             setTitle(aiData.title);
             setContent(aiData.content);
+            toast.success('AI ile içerik başarıyla oluşturuldu.');
         } catch (err) {
             console.error('AI İçeriği Oluşturma Hatası:', err);
             setError('AI ile içerik oluşturulurken bir hata oluştu.');
+            toast.error('AI ile içerik oluşturulurken bir hata oluştu.');
         }
         setLoading(false);
     };
@@ -39,9 +42,11 @@ const CreatePost = ({ onPostCreated }) => {
             onPostCreated(newPost);
             setTitle('');
             setContent('');
+            toast.success('Yazı başarıyla oluşturuldu.');
         } catch (error) {
             console.error('Yazı oluşturulurken hata oluştu:', error);
             alert('Yazı oluşturulurken bir hata oluştu.');
+            toast.error('Yazı oluşturulurken bir hata oluştu.');
         }
     };
 

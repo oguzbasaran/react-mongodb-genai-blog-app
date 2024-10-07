@@ -4,6 +4,8 @@ import PostList from './components/PostList';
 import CreatePost from './components/CreatePost';
 import { getPosts } from './api';
 import './App.css'; // CSS dosyanızı içe aktarın (Opsiyonel)
+import { ToastContainer, toast } from 'react-toastify'; // react-toastify'i içe aktarın
+import 'react-toastify/dist/ReactToastify.css'; // react-toastify CSS'ini içe aktarın
 
 const App = () => {
     const [posts, setPosts] = useState([]);
@@ -18,11 +20,18 @@ const App = () => {
             setPosts(data);
         } catch (error) {
             console.error('Yazılar alınırken hata oluştu:', error);
+            toast.error('Yazılar alınırken bir hata oluştu.');
         }
     };
 
     const addPost = (newPost) => {
         setPosts([newPost, ...posts]);
+        toast.success('Yeni yazı başarıyla eklendi.');
+    };
+
+    const removePost = (id) => {
+        setPosts(posts.filter(post => post._id !== id));
+        toast.success('Yazı başarıyla silindi.');
     };
 
     return (
@@ -30,7 +39,8 @@ const App = () => {
             <h1>Blog Yazma Sitesi</h1>
             <CreatePost onPostCreated={addPost} />
             <hr />
-            <PostList posts={posts} />
+            <PostList posts={posts} onPostDeleted={removePost} />
+            <ToastContainer /> {/* Toast bildirimlerini ekleyin */}
         </div>
     );
 };
