@@ -40,7 +40,7 @@ const App = () => {
             <CreatePost onPostCreated={addPost} />
             <hr />
             <PostList posts={posts} onPostDeleted={removePost} />
-            <ToastContainer /> {/* Toast bildirimlerini ekleyin */}
+            <ToastContainer /> {/* Toast bildirimlerini buraya ekleyin */}
         </div>
     );
 };

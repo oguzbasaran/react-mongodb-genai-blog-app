@@ -42,7 +42,6 @@ const CreatePost = ({ onPostCreated }) => {
             onPostCreated(newPost);
             setTitle('');
             setContent('');
-            toast.success('Yazı başarıyla oluşturuldu.');
         } catch (error) {
             console.error('Yazı oluşturulurken hata oluştu:', error);
             alert('Yazı oluşturulurken bir hata oluştu.');

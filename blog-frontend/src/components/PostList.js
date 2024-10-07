@@ -14,7 +14,7 @@ const PostList = ({ posts, onPostDeleted }) => {
                 const response = await deletePost(id);
                 console.log(`Silme işlemi başarılı. Yanıt:`, response);
                 onPostDeleted(id);
-                toast.success('Yazı başarıyla silindi.');
+                //toast.success('Yazı başarıyla silindi.');
             } catch (error) {
                 console.error('Yazı silinirken hata oluştu:', error);
                 if (error.response) {
