@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 // Router'ları içe aktarın
 import postsRouter from './routes/posts.js';
-import generateRoute from './routes/generate.js';
+import generateRouter from './routes/generate.js';
 
 dotenv.config();
 
@@ -14,12 +14,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000', // React uygulamanızın adresi
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
 app.use(express.json());
 
 // API Rotalarını kullanın
 app.use('/api/posts', postsRouter);
-app.use('/api/generate', generateRoute);
+app.use('/api/generate', generateRouter);
 
 // Mongoose Debug Modunu Etkinleştir (Opsiyonel)
 mongoose.set('debug', true);

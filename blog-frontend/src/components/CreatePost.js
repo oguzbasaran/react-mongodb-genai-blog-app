@@ -13,7 +13,9 @@ const CreatePost = ({ onPostCreated }) => {
         setLoading(true);
         setError('');
         try {
+            console.log('AI ile içerik oluşturma butonuna basıldı.');
             const aiData = await generateAIContent();
+            console.log('AI tarafından oluşturulan veri:', aiData);
             setTitle(aiData.title);
             setContent(aiData.content);
         } catch (err) {
@@ -31,7 +33,9 @@ const CreatePost = ({ onPostCreated }) => {
         }
 
         try {
+            console.log('Yazı oluşturma işlemi başlatılıyor.');
             const newPost = await createPost({ title, content });
+            console.log('Yeni yazı oluşturuldu:', newPost);
             onPostCreated(newPost);
             setTitle('');
             setContent('');
@@ -44,7 +48,11 @@ const CreatePost = ({ onPostCreated }) => {
     return (
         <div>
             <h2>Yeni Yazı Oluştur</h2>
-            <button onClick={handleGenerateAIContent} disabled={loading} style={{ padding: '10px 20px', marginBottom: '10px' }}>
+            <button
+                onClick={handleGenerateAIContent}
+                disabled={loading}
+                style={{ padding: '10px 20px', marginBottom: '10px' }}
+            >
                 {loading ? 'Yükleniyor...' : 'AI ile İçeriği Oluştur'}
             </button>
             {error && <p style={{ color: 'red' }}>{error}</p>}
