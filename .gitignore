@@ -1,2 +1,109 @@
+# Node.js and NPM-related files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
 
-blog-backend/.env
+# Log files
+logs/
+*.log
+logs/*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Crash dumps
+core.*
+
+# SSH key files
+*.pem
+
+# Development environment files
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.history/
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Build and output directories
+build/
+dist/
+public/build/
+public/static/
+
+# Test coverage
+coverage/
+.nyc_output/
+coverage-final.json
+
+# Temporary files
+temp/
+tmp/
+.cache/
+.parcel-cache/
+
+# Bower dependencies
+bower_components/
+
+# TypeScript definition files
+typings/
+
+# Miscellaneous
+*.swp
+.sass-cache/
+connect.lock
+lerna-debug.log*
+*.pid
+*.seed
+*.pid.lock
+*.tmproj
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Public keys
+*.pub
+
+# Firebase
+.firebase/
+
+# Private files
+.secret
+
+# React Native
+ios/build/
+android/app/build/
+
+# Storybook
+storybook-static/
+
+# Expo
+.expo/
+
+# macOS files
+.DS_Store
+
+# Linux files
+*~
+
+# Other environment variables
+.env.*
+
+# Jest test outputs
+jest-html-reporters-*.html
