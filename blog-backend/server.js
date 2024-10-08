@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-// Router'ları içe aktarın
+// Routers 
 import postsRouter from './routes/posts.js';
 import generateRouter from './routes/generate.js';
 
@@ -15,73 +15,72 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:3000', // React uygulamanızın adresi
-    methods: ['GET', 'POST', 'DELETE'], // DELETE methodunu ekleyin
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'DELETE'],
     credentials: true,
 }));
 app.use(express.json());
 
-// API Rotalarını kullanın
+// API Routes
 app.use('/api/posts', postsRouter);
 app.use('/api/generate', generateRouter);
 
-// Mongoose Debug Modunu Etkinleştir (Opsiyonel)
 mongoose.set('debug', true);
 
-// Bağlantı URI'sını Loglama (Şifre Hariç) - Güvenlik için Şifreyi Gizleyin
+// Logging the Connection URI (Excluding Password) - Hide the password for security
 const uriParts = process.env.MONGODB_URI.split(':');
 const uriWithoutPassword = `${uriParts[0]}:${uriParts[1]}:******@${uriParts[3]}`;
-console.log('MongoDB Bağlantı URI\'sı:', uriWithoutPassword);
+console.log('MongoDB Connection URI:', uriWithoutPassword);
 
-// Mongoose Bağlantısı
+// Mongoose Connection
 mongoose.connect(process.env.MONGODB_URI, {
   tls: true,
-  tlsAllowInvalidCertificates: false, // Geliştirme için gerekirse true yapabilirsiniz, ancak üretimde false olmalıdır
-  serverSelectionTimeoutMS: 30000, // 30 saniye
-  socketTimeoutMS: 45000, // 45 saniye
-  family: 4 // IPv4 kullanımı zorunlu kılınır
+  tlsAllowInvalidCertificates: false,
+  serverSelectionTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
+  family: 4 // IPv4
 })
   .then(() => {
-    console.log('MongoDB bağlantısı başarılı');
+    console.log('MongoDB connection successful');
     app.listen(PORT, () => {
-      console.log(`Sunucu ${PORT} portunda çalışıyor`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch(err => {
-    console.error('MongoDB bağlantı hatası:', err);
-    console.error('Hata Detayı:', err.stack);
+    console.error('MongoDB connection error:', err);
+    console.error('Error Details:', err.stack);
   });
 
-// Mongoose Bağlantı Olaylarını Dinleme
+// Listening to Mongoose Connection Events
 const db = mongoose.connection;
 
 db.on('connecting', () => {
-  console.log('Mongoose: Bağlantı kurmaya çalışılıyor...');
+  console.log('Mongoose: Attempting to connect...');
 });
 
 db.on('connected', () => {
-  console.log('Mongoose: Bağlantı başarılı');
+  console.log('Mongoose: Connection successful');
 });
 
 db.on('disconnecting', () => {
-  console.log('Mongoose: Bağlantı kesilmeye çalışılıyor...');
+  console.log('Mongoose: Attempting to disconnect...');
 });
 
 db.on('disconnected', () => {
-  console.log('Mongoose: Bağlantı kesildi');
+  console.log('Mongoose: Disconnected');
 });
 
 db.on('reconnected', () => {
-  console.log('Mongoose: Tekrar bağlantı kuruldu');
+  console.log('Mongoose: Reconnected');
 });
 
 db.on('error', (error) => {
-  console.error('Mongoose: Bağlantı hatası:', error);
+  console.error('Mongoose: Connection error:', error);
 });
 
-// Uygulama Kapatıldığında Bağlantıyı Kapatma
+// Closing the connection when the application is terminated
 process.on('SIGINT', async () => {
   await mongoose.connection.close();
-  console.log('Mongoose bağlantısı kapatıldı');
+  console.log('Mongoose connection closed');
   process.exit(0);
 });

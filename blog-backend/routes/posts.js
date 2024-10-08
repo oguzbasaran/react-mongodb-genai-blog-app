@@ -7,7 +7,7 @@ const router = express.Router();
 // GET all posts
 router.get('/', async (req, res) => {
     try {
-        const posts = await Post.find().sort({ createdAt: -1 }); // New posts first
+        const posts = await Post.find().sort({ createdAt: -1 });
         res.json(posts);
     } catch (err) {
         console.error('GET /api/posts Error:', err);

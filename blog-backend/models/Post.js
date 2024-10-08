@@ -1,4 +1,3 @@
-// models/Post.js
 import mongoose from 'mongoose';
 
 const PostSchema = new mongoose.Schema({
@@ -10,7 +9,7 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-}, { timestamps: true }); // timestamps seçeneğini etkinleştiriyoruz
+}, { timestamps: true });
 
 const Post = mongoose.model('Post', PostSchema);
 

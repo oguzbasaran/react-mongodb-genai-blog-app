@@ -1,7 +1,7 @@
 // src/components/PostList.js
 import React, { useState } from 'react';
 import { deletePost } from '../api';
-import { toast } from 'react-toastify'; // Import react-toastify
+import { toast } from 'react-toastify';
 
 const PostList = ({ posts, onPostDeleted }) => {
     const [deletingId, setDeletingId] = useState(null); // Track which post is being deleted
