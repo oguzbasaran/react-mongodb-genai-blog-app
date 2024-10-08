@@ -1,3 +1,6 @@
+![Uygulama Ekran Görüntüsü1](images/screenshotr1.png)
+![Uygulama Ekran Görüntüsü2](images/screenshotr3.png)
+
 # React MongoDB Generative AI Blog App
 
 A full-stack blog application built using React, Node.js, Express, MongoDB, and OpenAI's GPT models to generate blog content. The project features a Neumorphism-inspired design, making it visually appealing and user-friendly.
