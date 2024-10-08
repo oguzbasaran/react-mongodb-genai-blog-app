@@ -1,4 +1,4 @@
-![Uygulama Ekran Görüntüsü1](images/demo.gif)
+GIF: ![App Gif](images/demo.gif)
 
 # React MongoDB Generative AI Blog App
 
