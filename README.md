@@ -106,8 +106,6 @@ This project uses Neumorphism design principles to create a soft, 3D effect on U
 
 ## License
 
-## License
-
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Contributing
