@@ -1,5 +1,4 @@
 ![Uygulama Ekran Görüntüsü1](images/screenshotr1.png)
-![Uygulama Ekran Görüntüsü2](images/screenshotr3.png)
 
 # React MongoDB Generative AI Blog App
 
